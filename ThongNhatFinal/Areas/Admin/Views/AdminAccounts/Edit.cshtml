@@ -1,0 +1,54 @@
+﻿@model ThongNhatFinal.Models.Account
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+    <div class="row">
+            <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Accounts
+                        </header>
+                        <div class="panel-body">
+                            <div class="position-center">
+                                <form role="form" asp-action="Edit">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="AccountId" />
+                                <div class="form-group">
+                                    <label asp-for="FullName">Full Name</label>
+                                    <input type="text" asp-for="FullName" class="form-control" id="exampleInputEmail1" placeholder="Enter Full Name">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Phone">Phone</label>
+                                    <input type="number" asp-for="Phone" class="form-control" id="exampleInputPassword1" placeholder="Description">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Email">Email</label>
+                                    <input type="email" asp-for="Email" class="form-control" id="exampleInputEmail1" placeholder="Enter Full Name">
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select" id="idrole" name="idrole" style="min-width:200px; border-radius:5px; margin-left:10px; border-width:thin" asp-items="ViewBag.IsStatus" asp-for="Active">
+                                        <option value="" disabled selected>Choose Status</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                     <select class="custom-select" id="idrole" name="idrole" style="min-width:200px; border-radius:5px; margin-left:10px; border-width:thin" asp-items="ViewBag.RoleId" asp-for="Role">
+                                        <option value="" disabled selected>Choose Role</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-info" value="Save">Save</button>
+                            </form>
+                            </div>
+
+                        </div>
+                    </section>
+
+            </div>
+            <div class="col-lg-12">
+            </div>
+   </div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

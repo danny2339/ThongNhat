@@ -1,0 +1,96 @@
+﻿@model ThongNhatFinal.ModelViews.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="~/LoginAssets/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/LoginAssets/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/LoginAssets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/LoginAssets/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/LoginAssets/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="~/LoginAssets/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/LoginAssets/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/LoginAssets/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="~/LoginAssets/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="~/LoginAssets/css/util.css">
+	<link rel="stylesheet" type="text/css" href="~/LoginAssets/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('../LoginAssets/images/bg-01.jpg');">
+			<div class="wrap-login100">
+				<form asp-action="LoginAccount" class="login100-form validate-form">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Log in
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter Username">
+						<input class="input100" type="text" asp-for="UserName" placeholder="Username">
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" asp-for="Password" placeholder="Password">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+					<div class="container-login100-form-btn">
+						<button type="submit" class="login100-form-btn">
+							Login
+						</button>
+					</div>
+				</form>
+				<div class="container-login100-form-btn" style="margin-top:20px">
+						<a href="/register.html" class="login100-form-btn">
+							Register
+						</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="~/LoginAssets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="~/LoginAssets/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="~/LoginAssets/vendor/bootstrap/js/popper.js"></script>
+	<script src="~/LoginAssets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="~/LoginAssets/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="~/LoginAssets/vendor/daterangepicker/moment.min.js"></script>
+	<script src="~/LoginAssets/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="~/LoginAssets/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="~/LoginAssets/js/main.js"></script>
+
+</body>
+</html>
+

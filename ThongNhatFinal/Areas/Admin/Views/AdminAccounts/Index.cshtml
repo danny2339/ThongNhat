@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ThongNhatFinal.Models.Account>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="table-agile-info">
+ <div class="panel panel-default">
+    <div class="panel-heading">
+     Account
+    </div>
+    
+    <div>
+      <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+        <thead>
+          <tr>
+            <th data-breakpoints="xs">ID</th>
+            <th>Full Name</th>
+            <th>Phone</th>
+            <th>Mail</th>
+            <th>Active</th>
+            <th>Role</th>
+            <th>Last Login</th>
+            <th>Created Date</th>
+            <th>#</th>
+            
+            <th data-breakpoints="xs sm md" data-title="DOB">#</th>
+          </tr>
+        </thead>
+        <tbody>
+                    @if(Model != null)
+                    {
+                        foreach(var item in Model)
+                        {
+                            <tr data-expanded="true">
+                              <td>@item.AccountId</td>
+                              <td>@item.FullName</td>
+                              <td>@item.Phone</td>
+                              <td>@item.Email</td>
+                              <td>
+                                            @if (item.Active)
+                                            {
+                                                <div class="d-flex align-items-center">
+                                                    <div class="badge badge-success badge-dot m-r-10"></div>
+                                                    <div>Active</div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="d-flex align-items-center">
+                                                    <div class="badge badge-warning badge-dot m-r-10"></div>
+                                                    <div>Block</div>
+                                                </div>
+                                            }
+
+                                        </td>
+                              <td>@item.Role.RoleName</td>
+                              <td>@item.LastLogin</td>
+                              <td>@item.CreateDate</td>
+                              <td>                              
+                                <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Details" asp-route-id="@item.AccountId">View</a>
+                                <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Edit" asp-route-id="@item.AccountId">Edit</a>
+                                <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminAccounts" asp-action="Delete" asp-route-id="@item.AccountId">Delete</a>
+                             </td>
+                            </tr>
+                        }
+                    }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

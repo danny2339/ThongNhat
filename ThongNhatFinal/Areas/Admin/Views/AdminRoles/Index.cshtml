@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ThongNhatFinal.Models.Role>
+
+@{
+    ViewData["Title"] = "Role";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="table-agile-info">
+ <div class="panel panel-default">
+    <div class="panel-heading">
+     Role
+    </div>
+    
+    <div>
+      <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+        <thead>
+          <tr>
+            <th data-breakpoints="xs">ID</th>
+            <th>Role Name</th>
+            <th>Description</th>
+            
+           
+            <th data-breakpoints="xs sm md" data-title="DOB">#</th>
+          </tr>
+        </thead>
+        <tbody>
+                    @if(Model != null)
+                    {
+                        foreach(var item in Model)
+                        {
+                            <tr data-expanded="true">
+                              <td>@item.RoleId</td>
+                              <td>@item.RoleName</td>
+                              <td>@item.Description</td>
+                              <td>                              
+                                <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminRoles" asp-action="Details" asp-route-id="@item.RoleId">View</a>
+                                <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminRoles" asp-action="Edit" asp-route-id="@item.RoleId">Edit</a>
+                                <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminRoles" asp-action="Delete" asp-route-id="@item.RoleId">Delete</a>
+                             </td>
+                            </tr>
+                        }
+                    }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<p>
+   <a class="btn btn-primary" asp-controller="AdminRoles" asp-action="Create"><i class="fa fa-plus m-r-5"></i><span> Add Roles</span></a>
+</p>
+

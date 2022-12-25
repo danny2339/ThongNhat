@@ -1,0 +1,168 @@
+﻿@model List<ThongNhatFinal.ModelViews.CartItem>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+     List<Category> lscat = ViewBag.lscat;
+}
+
+ <div class="cart_area section_padding_100 clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="cart-table clearfix">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                            @if(Model != null && Model.Count() > 0)
+                            {
+                                foreach(var item in Model)
+                                {
+                                    <tr>
+                                        <td class="cart_product_img d-flex align-items-center">
+                                            <a href="#"><img src="~/images/products/@item.product.Thumb" alt="@item.product.Title"></a>
+                                            <h6>@item.product.ProductName</h6>
+                                        </td>
+                                        <td class="price"><span>$@item.product.Price</span></td>
+                                        <td class="qty">
+                                            <div class="quantity">
+                                                   <input data-mhh="@item.product.ProductId" data-cost="@item.product.Price" type="number" class="cartItem" id="txtamount" step="1" min="1" name="txtamount" value="@item.amount">
+                                            </div>
+                                        </td>
+                                        <td class="total_price"><span>$@item.TotalMoney</span></td>
+                                        <td><span class="icon_close" data-mhh="@item.product.ProductId"><img src="~/xmark-solid.svg" style="height:30px; width:30px" /></span></td>
+                                    </tr>
+                                }
+                            }
+                            
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="cart-footer d-flex mt-30">
+                            <div class="back-to-shop w-50">
+                                <a href="shop.html">Continue shooping</a>
+                            </div>
+                            <div class="update-checkout w-50 text-right">
+                               
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="cart-total-area mt-70">
+                            <div class="cart-page-heading">
+                                <h5>Cart total</h5>
+                                <p>Final info</p>
+                            </div>
+
+                            <ul class="cart-total-chart">
+                                <li><span>Subtotal</span> <span>$@Model.Sum(x=>x.TotalMoney)</span></li>
+                                <li><span><strong>Total</strong></span> <span><strong>$@Model.Sum(x=>x.TotalMoney)</strong></span></li>
+                            </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="checkout.html" class="btn karl-checkout-btn">Proceed to checkout</a>
+                    }
+                    else
+                    {
+                          <a href="/Login.html?returnUrl=/checkout.html" class="btn karl-checkout-btn">Proceed to checkout</a>
+                    }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                                @section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                $("#add-to-cart").click(function () {
+                    var productid = $('#ProductId').val();
+                    var amount = $('#txtamount').val();
+                    $.ajax({
+                        url: '/api/cart/add',
+                        type: "POST",
+                        dataType: "JSON",
+                        data: {
+                            productId: productid,
+                            amount: amount
+                        },
+                        success: function (response) {
+                            loadHeaderCart();
+                            location.reload();
+                        },
+                        error: function (error) {
+                            alert("There was an error posting the data to the server: " + error.responseText);
+                        }
+                    });
+                });
+            });
+
+            function loadHeaderCart() {
+                $('#numbercart').load("/AjaxContent/NumberCart");
+            }
+            $(".icon_close").click(function () {
+                var productid = $(this).attr("data-mhh");
+                $.ajax({
+                    url: "api/cart/remove",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        productId: productid
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            loadHeaderCart();
+                            window.location = 'cart.html';
+                        }
+                    },
+                    error: function (rs) {
+                        alert("Remove cart error!");
+                    }
+                });
+            });
+
+            $(".cartItem").click(function () {
+                var productid = $(this).attr("data-mhh");
+                var amounts = parseInt($(this).val());
+                $.ajax({
+                    url: "api/cart/update",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: {
+                        productID: productid,
+                        amount: amounts
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            loadHeaderCart();
+                            window.location = 'cart.html';
+                        }
+                    },
+                    error: function (rs) {
+                        alert("Update cart error!");
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<ThongNhatFinal.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customers";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="table-agile-info">
+ <div class="panel panel-default">
+    <div class="panel-heading">
+     Customers
+    </div>
+    
+    <div>
+      <table class="table" ui-jq="footable" ui-options='{
+        "paging": {
+          "enabled": true
+        },
+        "filtering": {
+          "enabled": true
+        },
+        "sorting": {
+          "enabled": true
+        }}'>
+        <thead>
+          <tr>
+            <th data-breakpoints="xs">ID</th>
+            <th>Full Name</th>
+            <th>Birthday</th>
+            <th>Avatar</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Created Date</th>
+            <th>Active</th>
+            <th>#</th>
+            
+            <th data-breakpoints="xs sm md" data-title="DOB">#</th>
+          </tr>
+        </thead>
+        <tbody>
+                    @if(Model != null)
+                    {
+                        foreach(var item in Model)
+                        {
+                            <tr data-expanded="true">
+                              <td>@item.CustomerId</td>
+                              <td>@item.Birthday</td>
+                              <td>@item.Avatar</td>
+                              <td>@item.Address</td>
+                              <td>@item.Email</td>
+                              <td>@item.Phone</td>
+                              <td>@item.CreateDate</td>
+                              <td>
+                                            @if (item.Active)
+                                            {
+                                                <div class="d-flex align-items-center">
+                                                    <div class="badge badge-success badge-dot m-r-10"></div>
+                                                    <div>Active</div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="d-flex align-items-center">
+                                                    <div class="badge badge-warning badge-dot m-r-10"></div>
+                                                    <div>Block</div>
+                                                </div>
+                                            }
+
+                                        </td>
+                              <td>                              
+                                <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminCustomers" asp-action="Details" asp-route-id="@item.CustomerId">View</a>
+                                <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminCustomers" asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a>
+                                <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminCustomers" asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>
+                             </td>
+                            </tr>
+                        }
+                    }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
